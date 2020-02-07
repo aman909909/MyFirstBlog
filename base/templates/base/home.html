@@ -1,0 +1,19 @@
+{%extends 'base/layout.html'%}
+{%block title%}Home{%endblock%}
+
+{%block content%}
+
+<h1 class="text-center mb-0">B<span style="color:#dbd4d4;">L</span>O<span style="color: #dbd4d4;">G</span> </h1>
+<hr class="mb-2" style="height:10px;">
+<h4 class="text-center mt-0">PERSONAL BLOG BY AMAN ASHISH</h4>
+<div class="container mt-5 text-center" style="width: 700px;">
+{%if messages%}
+  {%for message in messages%}
+    <div role="alert" class="alert {% if message.tags == 'success' %}alert-success{% endif %}">
+      {{message}}
+    </div>
+  {%endfor%}
+{%endif%}
+</div>
+
+{%endblock%}

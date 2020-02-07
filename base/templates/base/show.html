@@ -1,0 +1,22 @@
+{%extends 'base/layout.html'%}
+{%block title%}Blog{%endblock%}
+
+{%block content%}
+    <div class="container">
+        <h2 style="color: white; text-align: center; font-size: 80px; margin-bottom: 90px; margin-top: 50px;">BLOG</h2>
+        
+    
+    {%for b in blogs%}
+    
+     <div style="background:white; ">
+        
+      <h3 style="color: black; text-transform: uppercase; font-size: 40px; padding: 20px; font-weight: bold;">  {{b.subject}}</h3>
+  
+    
+    </div>
+    
+        
+    {%endfor%}
+    
+    </div>
+{%endblock%}
