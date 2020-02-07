@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
 from .models import blog
@@ -30,3 +30,8 @@ def show(request):
     return render(request,'base/show.html',{
         'blogs':blogs
     })
+
+
+def showdetail(request,k):
+    blogs=get_object_or_404(blog,pk=k)
+    return render(request,'base/show_detail.html',{'blog':blogs})
