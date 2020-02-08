@@ -2,6 +2,17 @@
 {%block title%}Blog Detail{%endblock%}
 
 {%block content%}
+<div class="container" style="margin-top: 140px; font-size: 50px; margin-bottom: 0;">
+    {{blog.subject}}
+    <hr style="text-align: left; width: 100%; color: white;">
+</div>
+<div class="container" style="margin-top: 40px; font-size: 30px; color: white;">
+    
+    {{blog.content}}
+</div>
+<div class="container mt-4" style="letter-spacing: 0px; color: grey;">
+    <h5>{{blog.name}}</h5>
+    <h5>{{blog.email}}</h5>
+</div>
 
-{{blog.content}}
 {%endblock%}
