@@ -8,16 +8,20 @@
     
     {%for b in blogs%}
     
-     <div style="background:white; ">
-        
-      <h3 style="color: black; text-transform: uppercase; font-size: 40px; padding: 20px; font-weight: bold;">  {{b.subject}}</h3>
-        <button class="btn btn-info ml-4"><a href="{%url 'show_detail'  k=b.id%}" style="color: white;">Click Here</a></button>
-        <hr>
-    
+    <div class="row mb-3 rounded" style="background: white;">
+      
+            <div class="col-4">
+                <h3 style="color:#595959; text-transform: uppercase; font-size: 40px; padding: 20px; font-weight: bold;">  {{b.subject}}</h3>
+                <h5 class="text-secondary ml-4">{{b.date}}</h5>
+                <button class="btn btn-dark ml-4 mb-3 mr-5 btn-lg mb-0 mt-2"><a href="{%url 'show_detail'  k=b.id%}" style="color: white;">Read More </a></button>
+                <a href="{%url 'delete' z=b.id%}" class="text-right ml-5" style="text-align: right;"><i class="fas fa-trash-alt text-right" style=" font-size: 35px; color: #595959; "></i></a>
+
+            </div>
+            <div class="col-7 mt-4 border border-dark rounded mb-4 pt-4" style="margin-right: 1px;">
+                {{b.content| truncatewords:60}}
+            </div>
     </div>
-    
-        
     {%endfor%}
-    
+
     </div>
 {%endblock%}

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{%static 'css/homec.css'%}">
     <script src="https://kit.fontawesome.com/ca258a9cbe.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
    <!-- <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"> -->
     <title>{%block title%}{%endblock%}</title>
     <style>
@@ -55,8 +56,8 @@
             
             
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'search'%}">
+            <input value="{{request.GET.q}}" name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-info  my-2 my-sm-0" style="color: white;" type="submit">Search</button>
           </form>
         </div>
