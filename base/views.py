@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.db.models import Q
 from .models import blog
 from django.contrib import messages
@@ -28,7 +28,7 @@ def sub(request):
 
 def show(request):
     bg=blog()
-    blogs=blog.objects.all()
+    blogs=blog.objects.all().order_by('-id')
     dt=bg.date
     return render(request,'base/show.html',{
         'blogs':blogs,
@@ -40,15 +40,25 @@ def showdetail(request,k):
     blogs=get_object_or_404(blog,pk=k)
     return render(request,'base/show_detail.html',{'blog':blogs})
 
+def delp(request,z):
+    zz=get_object_or_404(blog,id=z)
+    return render(request,'base/delete.html',{'bg':zz})
+
+
 def delete(request,z):
-    zz=get_object_or_404(blog,pk=z)
-    zz.delete()
-    blogs=blog.objects.all().order_by('-id')
-    return render(request,'base/show.html',{
-        'blogs':blogs
-    })
+    if request.method=="POST":
+
+         zz=get_object_or_404(blog,pk=z)
+         zz.delete()
+         blogs=blog.objects.all().order_by('-id')
+         return render(request,'base/show.html',{
+            'blogs':blogs
+         })
 
 def search(request):
     qu=request.GET['q']
-    blogs=blog.objects.all().filter(content__icontains=qu)
+    try:
+        blogs=blog.objects.all().filter(subject__icontains=qu)
+    except blog.DoesNotExist:
+        raise Http404("No post found!")
     return render(request,'base/show.html',{'blogs':blogs})

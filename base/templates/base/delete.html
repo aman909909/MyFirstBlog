@@ -1,0 +1,15 @@
+{%extends 'base/layout.html'%}
+{%block title%}Blog{%endblock%}
+
+{%block content%}
+<div class="jumbotron  container shadow-lg" style="margin-top: 150px; height: 270px;">
+    <h2>Are you sure you want to delete the post with title: <span style="color: rgb(160, 76, 73); font-weight: bold; text-decoration: underline;">{{bg.subject}}</span> ?</h2>
+    <form method="POST" action="{% url 'delete' z=bg.id%}" class="d-inline">
+        {%csrf_token%}
+        <button class="btn btn-danger mt-4 btn-lg">YES</button>
+    </form>
+    <a href="{%url 'show_detail' k=bg.id%}"><button class="btn btn-success ml-3 mt-4 btn-lg">NO</button></a>
+    <h6 class="mt-5 pb-0">*Once deleted action cannot be undone.</h6>
+</div>
+
+{%endblock%}
