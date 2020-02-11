@@ -1,0 +1,33 @@
+{%extends 'base/layout.html'%}
+{%block title%} Login{%endblock%}
+
+{%block content%}
+
+<div class="container jumbotron bg-dark pt-5 pb-4 shadow-lg" style="margin-top: 170px; width: 40%; color: white; text-decoration: underline;">
+    <h2 class="pt-0 mb-3 mb-5">
+        Login <i class="ml-2 mt-1 fas fa-sign-in-alt"></i>
+    </h2>
+    <form method="POST" action="{%url 'login_page'%}">
+        {%csrf_token%}
+        <div class="form-group">
+          <label for="username" style="color: white;">Username</label>
+          <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Username">
+          
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" style="color: white;">Password</label>
+          <input type="password" class="form-control"  name="password" id="exampleInputPassword1" placeholder="Password">
+        </div>
+      
+        <button type="submit" class="btn btn-primary mt-3">Login</button>
+       
+      </form>
+      {% for m in messages%}
+      <div role="alert" class="alert alert-danger mt-4 text-center">
+          {{m}}
+        </div>
+      {%endfor%}
+</div>
+
+
+{%endblock%}

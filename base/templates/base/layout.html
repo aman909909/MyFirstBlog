@@ -52,15 +52,24 @@
             <li class="nav-item active mr-3">
                 <a id="nac2" class="nav-link" href="https://www.linkedin.com/in/aman-ashish-b66953189/" style="color: white; font-weight: bold; font-size: 25px;"><i class="fab fa-linkedin-in mr-4"></i></a>
             </li>
+            <li class="nav-item mt-2 text-info" style="font-weight: bold; font-size: 25px;">
+              <span>Hello, {{request.user}}</span>
+             
+            </li>
+            <li class="nav-item ml-3 mt-2 " style="font-weight: bold; font-size: 25px;">
+              <span><a style="color: rgb(223, 96, 96);" href="{%url 'logout_page'%}">Logout</a></span>
+             
+            </li>
+            
            
             
             
           </ul>
-          <form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'search'%}">
+          <!--<form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'search'%}">
             <input value="{{request.GET.q}}" name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-info  my-2 my-sm-0" style="color: white;" type="submit">Search</button>
           </form>
-        </div>
+        </div>-->
       </nav>
     {%block content%}{%endblock%}
     <!-- Optional JavaScript -->

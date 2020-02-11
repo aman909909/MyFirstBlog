@@ -1,0 +1,31 @@
+{%extends 'base/layout.html'%}
+
+{%block title%} Signup{%endblock%}
+
+{%block content%}
+<div class="container jumbotron" style="margin-top: 150px;">
+<h3>Signup</h3>
+
+
+<form method="POST" action="">
+    {%csrf_token%}
+    {{form.username.label}}
+    {{form.username}}
+    <br>
+    {{form.email.label}}
+    {{form.email}}
+    <br>
+    {{form.password1.label}}
+    {{form.password1}}
+    <br>
+    {{form.password2.label}}
+    {{form.password2}}
+    <br>
+    {{form.errors}}
+    <br>
+    <input type="submit" name="create_user">
+</form>
+</div>
+
+
+{%endblock%}
