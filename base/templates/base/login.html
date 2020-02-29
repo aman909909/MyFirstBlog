@@ -1,33 +1,51 @@
-{%extends 'base/layout.html'%}
-{%block title%} Login{%endblock%}
-
-{%block content%}
-
-<div class="container jumbotron bg-dark pt-5 pb-4 shadow-lg" style="margin-top: 170px; width: 40%; color: white; text-decoration: underline;">
-    <h2 class="pt-0 mb-3 mb-5">
-        Login <i class="ml-2 mt-1 fas fa-sign-in-alt"></i>
-    </h2>
-    <form method="POST" action="{%url 'login_page'%}">
-        {%csrf_token%}
-        <div class="form-group">
-          <label for="username" style="color: white;">Username</label>
-          <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Username">
-          
+{%load static%}
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+            body{
+                background: rgb(223, 213, 213);
+            }
+        </style>
+        <link rel="stylesheet" href="{%static 'css/homec.css'%}">
+        <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+    </head>
+    <body>
+        <div class="container jumbotron bg-dark pt-5 pb-4 shadow-lg" style="margin-top: 170px; width: 40%; color: white; text-decoration: underline;">
+            <h2 class="pt-0 mb-3 mb-5">
+                Login <i class="ml-2 mt-1 fas fa-sign-in-alt"></i>
+            </h2>
+            <form method="POST" action="{%url 'login_page'%}">
+                {%csrf_token%}
+                <div class="form-group">
+                  <label for="username" style="color: white;">Username</label>
+                  <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Username">
+                  
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" style="color: white;">Password</label>
+                  <input type="password" class="form-control"  name="password" id="exampleInputPassword1" placeholder="Password">
+                </div>
+              
+                <button type="submit" class="btn btn-primary mt-3">Login</button>
+               
+              </form>
+              {%if messages%}
+                {%for message in messages%}
+                  <div role="alert" class="alert {% if message.tags == 'success' %}alert-success{% endif %}{% if message.tags == 'info' %}alert-danger{% endif %}">
+                  {{message}}
+                 </div>
+                 {%endfor%}
+              {%endif%}
+             
+              
+              <p class="text-light d-inline">Don't have an account?</p> <a class="text-info ml-2" href="{%url 'signup_page'%}">Signup</a>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1" style="color: white;">Password</label>
-          <input type="password" class="form-control"  name="password" id="exampleInputPassword1" placeholder="Password">
-        </div>
-      
-        <button type="submit" class="btn btn-primary mt-3">Login</button>
-       
-      </form>
-      {% for m in messages%}
-      <div role="alert" class="alert alert-danger mt-4 text-center">
-          {{m}}
-        </div>
-      {%endfor%}
-</div>
+        
+
+    </body>
+</html>
 
 
-{%endblock%}

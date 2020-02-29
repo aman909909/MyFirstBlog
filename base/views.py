@@ -5,11 +5,12 @@ from .models import blog
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
+from passlib.hash import pbkdf2_sha256
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
-
+@login_required(login_url='login_page')
 def home(request):
     return render(request,'base/home.html')
 
@@ -33,7 +34,7 @@ def sub(request):
         return render(request,'base/home.html')
     else:
         return HttpResponse('Wrong')
-        
+
         
 @login_required(login_url='login_page')
 def show(request):
@@ -74,6 +75,8 @@ def search(request):
     return render(request,'base/show.html',{'blogs':blogs})
 
 def loginpage(request):
+    if request.user.is_authenticated:
+        return redirect('home_page')
     if request.method=="POST":
         username=request.POST.get('username')
         password=request.POST.get('password')
@@ -88,17 +91,51 @@ def loginpage(request):
 
 
 def signup(request):
-    form= CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('home_page')
+
+    
     if request.method=="POST":
-        form= CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request,'Account was created for '+user)
+        
+        name=request.POST['username']
+        el=request.POST['email']
+        up_file = request.FILES['profile_photo']
+        fs = FileSystemStorage()
+        fs.save(up_file.name,up_file)
+        
+        pwd1=request.POST['password1']
+        pwd2=request.POST['password2']
+        try:
+            user = User.objects.get(username=name)
+        except :
+            
+            if pwd1 != pwd2:
+                messages.info(request,"Passwords don't match!")
+                return render(request,'base/signup.html')
+            if len(pwd1) <8:
+                messages.info(request,"Minimum size of password is 8!")
+                return render(request,'base/signup.html')
+            us=User(username=name,email=el)
+            
+            us.set_password(pwd1)
+            us.save()
+            
+            messages.success(request,'Account created')
             return redirect('login_page')
-    context = {'form':form}
-    return render(request,'base/signup.html',context)
+        else :
+            messages.info(request,'Username already exists!')
+            return render(request,'base/signup.html')
+    return render(request,'base/signup.html')
 
 def logoutUser(request):
     logout(request)
     return render(request,'base/login.html')
+
+def profile(request,z):
+    zz=get_object_or_404(User,pk=z)
+    return render(request,'base/profile.html',{
+      #  'val':zz
+    })
+
+
+    

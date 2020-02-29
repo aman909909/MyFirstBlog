@@ -11,11 +11,11 @@
         {%csrf_token%}
         <div class="form-group">
           <label for="name"><span id="name_field" style="color: white; font-size: 30px;">Name</span></label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
+          <input type="text" class="form-control " id="name" name="name" value={{request.user}} placeholder={{request.user}} readonly>
         </div>
         <div class="form-group">
             <label for="email"><span id="email_field"style="color: white; font-size: 30px;">Email</span></label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="abc@xyz.com">
+            <input type="email" class="form-control" id="email" name="email" placeholder={{request.user.email}} value={{request.user.email}} readonly>
         </div>
         <div class="form-group">
             <label for="subject"><span id="suject_field"style="color: white; font-size: 30px;">Subject</span></label>

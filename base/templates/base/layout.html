@@ -40,23 +40,34 @@
             <li class="nav-item active mr-2">
               <a id="nac2" class="nav-link" href="{%url 'show_page'%}" style="color: white; font-weight: bold; font-size: 25px;">BLOG</a>
             </li>
-            <li class="nav-item active mr-5">
+            <li class="nav-item active mr-3">
                 <a id="nac2" class="nav-link" href="{%url 'new_page'%}" style="color: white; font-weight: bold; font-size: 25px;">ADD NEW</a>
               </li>
-            <li class="nav-item active mr-3">
+            <li class="nav-item active mr-2">
                 <a id="nac2" class="nav-link" href="https://www.facebook.com/amanashish123" style="color: white; font-weight: bold; font-size: 25px;"><i class="fab fa-facebook-f mr-1 ml-4"></i></a>
             </li>
-            <li class="nav-item active mr-3">
+            <!--<li class="nav-item active mr-3">
                 <a id="nac2" class="nav-link" href="#" style="color: white; font-weight: bold; font-size: 25px;"><i class="fab fa-twitter mr-1"></i></a>
-            </li>
+            </li>-->
             <li class="nav-item active mr-3">
                 <a id="nac2" class="nav-link" href="https://www.linkedin.com/in/aman-ashish-b66953189/" style="color: white; font-weight: bold; font-size: 25px;"><i class="fab fa-linkedin-in mr-4"></i></a>
             </li>
-            <li class="nav-item mt-2 text-info" style="font-weight: bold; font-size: 25px;">
-              <span>Hello, {{request.user}}</span>
+           
+          </ul>
+
+          <form class="form-inline my-2 my-lg-0 navbar-right mr-0 " method="GET" action="{%url 'search'%}">
+            <input value="{{request.GET.q}}" name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-info  my-2 my-sm-0" style="color: white;" type="submit">Search</button>
+          </form>
+
+
+          <ul class="navbar-nav ml-5 navbar-right" >
+           
+            <li class="nav-item mt-1 text-info" style="font-weight: bold; font-size: 25px;">
+              <span>Hello, <a href="{%url 'profile' z=user.id%}">{{request.user}}</a></span>
              
             </li>
-            <li class="nav-item ml-3 mt-2 " style="font-weight: bold; font-size: 25px;">
+            <li class="nav-item ml-3 mt-1 " style="font-weight: bold; font-size: 25px;">
               <span><a style="color: rgb(223, 96, 96);" href="{%url 'logout_page'%}">Logout</a></span>
              
             </li>
@@ -65,11 +76,8 @@
             
             
           </ul>
-          <!--<form class="form-inline my-2 my-lg-0" method="GET" action="{%url 'search'%}">
-            <input value="{{request.GET.q}}" name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-info  my-2 my-sm-0" style="color: white;" type="submit">Search</button>
-          </form>
-        </div>-->
+         
+        </div>
       </nav>
     {%block content%}{%endblock%}
     <!-- Optional JavaScript -->
