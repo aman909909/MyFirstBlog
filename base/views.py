@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.http import HttpResponse,Http404
 from django.db.models import Q
-from .models import blog
+from .models import blog, UserProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -96,12 +96,11 @@ def signup(request):
 
     
     if request.method=="POST":
-        
         name=request.POST['username']
         el=request.POST['email']
-        up_file = request.FILES['profile_photo']
-        fs = FileSystemStorage()
-        fs.save(up_file.name,up_file)
+        #up_file = request.FILES['profile_photo']
+        #fs = FileSystemStorage()
+        #fs.save(up_file.name,up_file)
         
         pwd1=request.POST['password1']
         pwd2=request.POST['password2']
@@ -109,16 +108,25 @@ def signup(request):
             user = User.objects.get(username=name)
         except :
             
-            if pwd1 != pwd2:
-                messages.info(request,"Passwords don't match!")
-                return render(request,'base/signup.html')
-            if len(pwd1) <8:
+            #if pwd1 != pwd2:
+              #  messages.info(request,"Passwords don't match!")
+               # return render(request,'base/signup.html')
+            if len(pwd1) <2:
                 messages.info(request,"Minimum size of password is 8!")
                 return render(request,'base/signup.html')
             us=User(username=name,email=el)
-            
             us.set_password(pwd1)
             us.save()
+            
+
+            p=UserProfile()
+            user = User.objects.get(username=name)
+            p.user=user
+            p.img = request.FILES['profile']
+            p.location=request.POST['location']
+            p.save()
+            
+         
             
             messages.success(request,'Account created')
             return redirect('login_page')
@@ -132,6 +140,8 @@ def logoutUser(request):
     return render(request,'base/login.html')
 
 def profile(request,z):
+    user = User.objects.get(pk=z)
+    print(user.userprofile.img.url)
     zz=get_object_or_404(User,pk=z)
     return render(request,'base/profile.html',{
       #  'val':zz

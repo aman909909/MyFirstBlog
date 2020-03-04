@@ -2,7 +2,29 @@
 {%block title%}Profile{%endblock%}
 
 {%block content%}
-<h3>hello
-{{user.email}}
-</h3>
+<div class="container jumbotron bg-dark text-light" style="margin-top: 100px; height: 50px; padding-top: 20px; font-weight: 400;">
+    <h2 class="text-center" style="font-weight: bold;">PROFILE</h2>
+</div>
+<div class="container bg-light" style="margin-top: 40px; border-radius: 30px;">
+    <div class="row mt-3">
+        <div class="col-5 mt-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/blog{{user.userprofile.img.url}}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+
+        </div>
+        <div class="col-7 mt-5">
+            <ul>
+                <li>{{user.username}}</li>
+                <li>{{user.email}}</li>
+                <li>{{user.userprofile.location}}</li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
 {%endblock%}
