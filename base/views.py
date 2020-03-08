@@ -111,7 +111,7 @@ def signup(request):
             if pwd1 != pwd2:
                messages.info(request,"Passwords don't match!")
                return render(request,'base/signup.html')
-            if len(pwd1) <2:
+            if len(pwd1) <8:
                 messages.info(request,"Minimum size of password is 8!")
                 return render(request,'base/signup.html')
             us=User(username=name,email=el)
