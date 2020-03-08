@@ -12,19 +12,15 @@ hr{
 body{
     background: #5A5A5A;
 }
-.navbar{
-    background: #5A5A5A;
-    color: white;
-}
+
 h4{
     color: white;
     letter-spacing: 10px;
 }
-#nv{
-    color: white;
-}
+
 
 #foot{
     font-size: 30px;
     padding-bottom: 5px;
     margin-bottom: 5px;
+}

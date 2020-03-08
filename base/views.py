@@ -108,9 +108,9 @@ def signup(request):
             user = User.objects.get(username=name)
         except :
             
-            #if pwd1 != pwd2:
-              #  messages.info(request,"Passwords don't match!")
-               # return render(request,'base/signup.html')
+            if pwd1 != pwd2:
+               messages.info(request,"Passwords don't match!")
+               return render(request,'base/signup.html')
             if len(pwd1) <2:
                 messages.info(request,"Minimum size of password is 8!")
                 return render(request,'base/signup.html')
@@ -123,7 +123,6 @@ def signup(request):
             user = User.objects.get(username=name)
             p.user=user
             p.img = request.FILES['profile']
-            p.location=request.POST['location']
             p.save()
             
          
@@ -140,12 +139,13 @@ def logoutUser(request):
     return render(request,'base/login.html')
 
 def profile(request,z):
-    user = User.objects.get(pk=z)
-    print(user.userprofile.img.url)
-    zz=get_object_or_404(User,pk=z)
     return render(request,'base/profile.html',{
-      #  'val':zz
     })
 
+def changepro(request):
+   p = UserProfile.objects.get(user_id=request.user.id)
+   p.img = request.FILES['profilepho']
+   p.save()
+   return render(request,'base/profile.html')
 
     
